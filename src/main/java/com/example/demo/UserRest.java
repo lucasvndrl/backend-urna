@@ -38,11 +38,28 @@ public class UserRest {
         return userDAO.findAll();
     }
     
+    @GetMapping
+    @RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
+    public User listById(@PathVariable String id){
+    	User usuario = null;
+    	
+    	List<User> usuarios = this.listar();
+    	
+    	for (int i = 0; i < usuarios.size(); i++) {
+            if(usuarios.get(i).getCpf().equals(id)) {
+                usuario = usuarios.get(i);
+            }
+        }
+    	
+    	return usuario;
+    }
+    
     @PostMapping
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity<User> salvar(@RequestBody User user){
     	boolean userVerify = this.userService.verificadorCPF(user);
     	if(!userVerify) {
+    		this.userService.populateNameUser(user);
     		User save = userDAO.save(user);
     		return new ResponseEntity<User>(save, HttpStatus.OK);
     	}else {
