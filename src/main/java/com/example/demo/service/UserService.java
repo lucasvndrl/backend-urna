@@ -34,10 +34,10 @@ public class UserService {
 
     public User populateNameUser(User user) {
         ArrayList<String> listUsersNames = new ArrayList<String>();
-        listUsersNames.add("vitao");
-        listUsersNames.add("renatao");
-        listUsersNames.add("ketao");
-        listUsersNames.add("gomes");
+        listUsersNames.add("Victor");
+        listUsersNames.add("Renato");
+        listUsersNames.add("Lucas");
+        listUsersNames.add("Gabriel");
         Collections.shuffle(listUsersNames);
         for (int i = 0; i < listUsersNames.size(); i++) {
             user.setNomeUsuario(listUsersNames.get(i));
